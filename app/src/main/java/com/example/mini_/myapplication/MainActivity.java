@@ -25,64 +25,59 @@ public class MainActivity extends AppCompatActivity {
         String sign;
         TextView text;
 
+        // check if there are any states saved.
         if (savedInstanceState != null) {
+            // recovers the states of the nine buttons.
             sign = (String) savedInstanceState.getSerializable("buttonOne");
             text = (TextView) findViewById(R.id.button1);
             text.setText(sign);
-
             sign = (String) savedInstanceState.getSerializable("buttonTwo");
             text = (TextView) findViewById(R.id.button2);
             text.setText(sign);
-
             sign = (String) savedInstanceState.getSerializable("buttonThree");
             text = (TextView) findViewById(R.id.button3);
             text.setText(sign);
-
             sign = (String) savedInstanceState.getSerializable("buttonFour");
             text = (TextView) findViewById(R.id.button4);
             text.setText(sign);
-
             sign = (String) savedInstanceState.getSerializable("buttonFive");
             text = (TextView) findViewById(R.id.button5);
             text.setText(sign);
-
             sign = (String) savedInstanceState.getSerializable("buttonSix");
             text = (TextView) findViewById(R.id.button6);
             text.setText(sign);
-
             sign = (String) savedInstanceState.getSerializable("buttonSeven");
             text = (TextView) findViewById(R.id.button7);
             text.setText(sign);
-
             sign = (String) savedInstanceState.getSerializable("buttonEight");
             text = (TextView) findViewById(R.id.button8);
             text.setText(sign);
-
             sign = (String) savedInstanceState.getSerializable("buttonNine");
             text = (TextView) findViewById(R.id.button9);
             text.setText(sign);
 
+            // if end of game was reached, recover the winner text (or draw).
             int textPlayerOne = (int) savedInstanceState.getSerializable("textPlayerOne");
             TextView viewOne = (TextView) findViewById(R.id.playerOne);
             viewOne.setVisibility(textPlayerOne);
-
             int textPlayerTwo = (int) savedInstanceState.getSerializable("textPlayerTwo");
             TextView viewTwo = (TextView) findViewById(R.id.playerTwo);
             viewTwo.setVisibility(textPlayerTwo);
-
             int textPlayerDraw = (int) savedInstanceState.getSerializable("textPlayerDraw");
             TextView viewDraw = (TextView) findViewById(R.id.playerDraw);
             viewDraw.setVisibility(textPlayerDraw);
 
+            // if end of game was reached, this will recover restart text en disable buttons.
             if(textPlayerOne == View.VISIBLE || textPlayerTwo == View.VISIBLE
                     || textPlayerDraw == View.VISIBLE) {
-                buttonOut();
                 TextView textNewGame = (TextView) findViewById(R.id.pressNewGame);
                 textNewGame.setVisibility(View.VISIBLE);
+                buttonOut();
             }
         }
     }
 
+    // this method disables all the game buttons.
     public void buttonOut() {
         Button but1 = (Button) findViewById(R.id.button1);
         but1.setEnabled(false);
@@ -104,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         but9.setEnabled(false);
     }
 
+    // this method may draw a 'X' or 'O' on the pressed button.
     public void drawSign(TileState state, int id) {
         switch (state) {
             case CROSS:
@@ -119,130 +115,108 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //this method checks if there is a winner.
     public void drawWinner(GameState winner) {
         TextView textNewGame = (TextView) findViewById(R.id.pressNewGame);
+        TextView text;
         switch (winner) {
             case IN_PROGRESS:
                 break;
             case PLAYER_ONE:
                 // show player 1 won
-                TextView textOne = (TextView) findViewById(R.id.playerOne);
-                textOne.setVisibility(View.VISIBLE);
+                text = (TextView) findViewById(R.id.playerOne);
+                text.setVisibility(View.VISIBLE);
                 textNewGame.setVisibility(View.VISIBLE);
                 buttonOut();
                 break;
             case PLAYER_TWO:
                 // show player 2 won
-                TextView textTwo = (TextView) findViewById(R.id.playerTwo);
-                textTwo.setVisibility(View.VISIBLE);
+                text = (TextView) findViewById(R.id.playerTwo);
+                text.setVisibility(View.VISIBLE);
                 textNewGame.setVisibility(View.VISIBLE);
                 buttonOut();
                 break;
             case DRAW:
                 // show game was draw
-                TextView textDraw = (TextView) findViewById(R.id.playerDraw);
-                textDraw.setVisibility(View.VISIBLE);
+                text = (TextView) findViewById(R.id.playerDraw);
+                text.setVisibility(View.VISIBLE);
                 textNewGame.setVisibility(View.VISIBLE);
                 buttonOut();
                 break;
         }
     }
 
+    // this method is called when one of the game buttons is pressed.
     public void tileClicked(View view) {
         int id = view.getId();
-        int row = 0;
-        int column = 0;
         TileState state;
         GameState winner;
 
         switch (id) {
             case R.id.button1:
-                state = game.choose(row, column);
+                state = game.choose(0, 0);
                 drawSign(state, id);
-                winner = game.won(row, column);
+                winner = game.won(0, 0);
                 drawWinner(winner);
                 break;
-
             case R.id.button2:
-                row = 0;
-                column = 1;
-                state = game.choose(row, column);
+                state = game.choose(0, 1);
                 drawSign(state, id);
-                winner = game.won(row, column);
+                winner = game.won(0, 1);
                 drawWinner(winner);
                 break;
-
             case R.id.button3:
-                row = 0;
-                column = 2;
-                state = game.choose(row, column);
+                state = game.choose(0, 2);
                 drawSign(state, id);
-                winner = game.won(row, column);
+                winner = game.won(0, 2);
                 drawWinner(winner);
                 break;
-
             case R.id.button4:
-                row = 1;
-                column = 0;
-                state = game.choose(row, column);
+                state = game.choose(1, 0);
                 drawSign(state, id);
-                winner = game.won(row, column);
+                winner = game.won(1, 0);
                 drawWinner(winner);
                 break;
-
             case R.id.button5:
-                row = 1;
-                column = 1;
-                state = game.choose(row, column);
+                state = game.choose(1, 1);
                 drawSign(state, id);
-                winner = game.won(row, column);
+                winner = game.won(1, 1);
                 drawWinner(winner);
                 break;
-
             case R.id.button6:
-                row = 1;
-                column = 2;
-                state = game.choose(row, column);
+                state = game.choose(1,2);
                 drawSign(state, id);
-                winner = game.won(row, column);
+                winner = game.won(1,2);
                 drawWinner(winner);
                 break;
-
             case R.id.button7:
-                row = 2;
-                column = 0;
-                state = game.choose(row, column);
+                state = game.choose(2, 0);
                 drawSign(state, id);
-                winner = game.won(row, column);
+                winner = game.won(2, 0);
                 drawWinner(winner);
                 break;
-
             case R.id.button8:
-                row = 2;
-                column = 1;
-                state = game.choose(row, column);
+                state = game.choose(2, 1);
                 drawSign(state, id);
-                winner = game.won(row, column);
+                winner = game.won(2, 1);
                 drawWinner(winner);
                 break;
-
             case R.id.button9:
-                row = 2;
-                column = 2;
-                state = game.choose(row, column);
+                state = game.choose(2, 2);
                 drawSign(state, id);
-                winner = game.won(row, column);
+                winner = game.won(2, 2);
                 drawWinner(winner);
                 break;
         }
     }
 
+    // this method is called when the reset button is pressed.
     public void resetClicked(View view) {
         game = new Game();
         setContentView(R.layout.activity_main);
     }
 
-
+    // this method is used to get the text of any button.
     public String putState(int id) {
         TextView State = (TextView)findViewById(id);
         String saveText = State.getText().toString();
@@ -253,41 +227,33 @@ public class MainActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
+        // this saves the current states of the buttons.
         String saveTextOne = putState(R.id.button1);
         outState.putSerializable("buttonOne", saveTextOne);
-
         String saveTextTwo = putState(R.id.button2);
         outState.putSerializable("buttonTwo", saveTextTwo);
-
         String saveTextThree = putState(R.id.button3);
         outState.putSerializable("buttonThree", saveTextThree);
-
         String saveTextFour = putState(R.id.button4);
         outState.putSerializable("buttonFour", saveTextFour);
-
         String saveTextFive = putState(R.id.button5);
         outState.putSerializable("buttonFive", saveTextFive);
-
         String saveTextSix = putState(R.id.button6);
         outState.putSerializable("buttonSix", saveTextSix);
-
         String saveTextSeven = putState(R.id.button7);
         outState.putSerializable("buttonSeven", saveTextSeven);
-
         String saveTextEight = putState(R.id.button8);
         outState.putSerializable("buttonEight", saveTextEight);
-
         String saveTextNine = putState(R.id.button9);
         outState.putSerializable("buttonNine", saveTextNine);
 
+        // saves the state of the text views.
         TextView textOne = (TextView) findViewById(R.id.playerOne);
         int text1 = textOne.getVisibility();
         outState.putSerializable("textPlayerOne", text1);
-
         TextView textTwo = (TextView) findViewById(R.id.playerTwo);
         int text2 = textTwo.getVisibility();
         outState.putSerializable("textPlayerTwo", text2);
-
         TextView textDraw = (TextView) findViewById(R.id.playerDraw);
         int text0 = textDraw.getVisibility();
         outState.putSerializable("textPlayerDraw", text0);

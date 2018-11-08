@@ -14,6 +14,7 @@ public class Game implements Serializable {
     private int movesPlayed;
     private Boolean gameOver;
 
+    // initialize blank buttons
     public Game() {
         board = new TileState[BOARD_SIZE][BOARD_SIZE];
         for(int i=0; i<BOARD_SIZE; i++)
@@ -24,6 +25,7 @@ public class Game implements Serializable {
         gameOver = false;
     }
 
+    // Give pressed button the correct tile state and switch from player
     public TileState choose(int row, int column) {
         TileState state = board[row][column];
         if (state == TileState.BLANK) {
@@ -104,23 +106,18 @@ public class Game implements Serializable {
         // check if any diagonal from 2,0 to 0,2 is made.
         countCross = 0;
         countCircle = 0;
-        int rowCross = 0;
-        int colCross = 2;
-        int rowCircle = 0;
-        int colCircle = 2;
-        for (int ok = 0; ok < n; ++ok) {
-            if (board[rowCross][colCross] == cross) {
+        int col= 2;
+        for (int row = 0; row < n; ++row) {
+            if (board[row][col] == cross) {
                 countCross++;
-                rowCross++;
-                colCross--;
+                col--;
                 if (countCross == n) {
                     return GameState.PLAYER_ONE;
                 }
             }
-            if (board[rowCircle][colCircle] == circle) {
+            else if (board[row][col] == circle) {
                 countCircle++;
-                rowCircle++;
-                colCircle--;
+                col--;
                 if (countCircle == n) {
                     return GameState.PLAYER_TWO;
                 }

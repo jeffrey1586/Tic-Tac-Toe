@@ -21,12 +21,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        game = new Game();
+
+        if (savedInstanceState == null){
+            game = new Game();
+        }
+
         String sign;
         TextView text;
-
         // check if there are any states saved.
         if (savedInstanceState != null) {
+
+            // restore the previous game
+            game = (Game) savedInstanceState.getSerializable("oldGame");
+
             // recovers the states of the nine buttons.
             sign = (String) savedInstanceState.getSerializable("buttonOne");
             text = (TextView) findViewById(R.id.button1);
@@ -246,6 +253,9 @@ public class MainActivity extends AppCompatActivity {
         outState.putSerializable("buttonEight", saveTextEight);
         String saveTextNine = putState(R.id.button9);
         outState.putSerializable("buttonNine", saveTextNine);
+
+        // save the game in outState
+        outState.putSerializable("oldGame", game);
 
         // saves the state of the text views.
         TextView textOne = (TextView) findViewById(R.id.playerOne);

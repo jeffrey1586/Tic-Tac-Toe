@@ -36,48 +36,48 @@ public class MainActivity extends AppCompatActivity {
 
             // recovers the states of the nine buttons.
             sign = (String) savedInstanceState.getSerializable("buttonOne");
-            text = (TextView) findViewById(R.id.button1);
+            text = findViewById(R.id.button1);
             text.setText(sign);
             sign = (String) savedInstanceState.getSerializable("buttonTwo");
-            text = (TextView) findViewById(R.id.button2);
+            text = findViewById(R.id.button2);
             text.setText(sign);
             sign = (String) savedInstanceState.getSerializable("buttonThree");
-            text = (TextView) findViewById(R.id.button3);
+            text = findViewById(R.id.button3);
             text.setText(sign);
             sign = (String) savedInstanceState.getSerializable("buttonFour");
-            text = (TextView) findViewById(R.id.button4);
+            text = findViewById(R.id.button4);
             text.setText(sign);
             sign = (String) savedInstanceState.getSerializable("buttonFive");
-            text = (TextView) findViewById(R.id.button5);
+            text = findViewById(R.id.button5);
             text.setText(sign);
             sign = (String) savedInstanceState.getSerializable("buttonSix");
-            text = (TextView) findViewById(R.id.button6);
+            text = findViewById(R.id.button6);
             text.setText(sign);
             sign = (String) savedInstanceState.getSerializable("buttonSeven");
-            text = (TextView) findViewById(R.id.button7);
+            text = findViewById(R.id.button7);
             text.setText(sign);
             sign = (String) savedInstanceState.getSerializable("buttonEight");
-            text = (TextView) findViewById(R.id.button8);
+            text =  findViewById(R.id.button8);
             text.setText(sign);
             sign = (String) savedInstanceState.getSerializable("buttonNine");
-            text = (TextView) findViewById(R.id.button9);
+            text = findViewById(R.id.button9);
             text.setText(sign);
 
             // if end of game was reached, recover the winner text (or draw).
             int textPlayerOne = (int) savedInstanceState.getSerializable("textPlayerOne");
-            TextView viewOne = (TextView) findViewById(R.id.playerOne);
+            TextView viewOne = findViewById(R.id.playerOne);
             viewOne.setVisibility(textPlayerOne);
             int textPlayerTwo = (int) savedInstanceState.getSerializable("textPlayerTwo");
-            TextView viewTwo = (TextView) findViewById(R.id.playerTwo);
+            TextView viewTwo = findViewById(R.id.playerTwo);
             viewTwo.setVisibility(textPlayerTwo);
             int textPlayerDraw = (int) savedInstanceState.getSerializable("textPlayerDraw");
-            TextView viewDraw = (TextView) findViewById(R.id.playerDraw);
+            TextView viewDraw = findViewById(R.id.playerDraw);
             viewDraw.setVisibility(textPlayerDraw);
 
             // if end of game was reached, this will recover restart text en disable buttons.
             if(textPlayerOne == View.VISIBLE || textPlayerTwo == View.VISIBLE
                     || textPlayerDraw == View.VISIBLE) {
-                TextView textNewGame = (TextView) findViewById(R.id.pressNewGame);
+                TextView textNewGame = findViewById(R.id.pressNewGame);
                 textNewGame.setVisibility(View.VISIBLE);
                 buttonOut();
             }
@@ -86,23 +86,23 @@ public class MainActivity extends AppCompatActivity {
 
     // this method disables all the game buttons.
     public void buttonOut() {
-        Button but1 = (Button) findViewById(R.id.button1);
+        Button but1 = findViewById(R.id.button1);
         but1.setEnabled(false);
-        Button but2 = (Button) findViewById(R.id.button2);
+        Button but2 = findViewById(R.id.button2);
         but2.setEnabled(false);
-        Button but3 = (Button) findViewById(R.id.button3);
+        Button but3 = findViewById(R.id.button3);
         but3.setEnabled(false);
-        Button but4 = (Button) findViewById(R.id.button4);
+        Button but4 = findViewById(R.id.button4);
         but4.setEnabled(false);
-        Button but5 = (Button) findViewById(R.id.button5);
+        Button but5 = findViewById(R.id.button5);
         but5.setEnabled(false);
-        Button but6 = (Button) findViewById(R.id.button6);
+        Button but6 = findViewById(R.id.button6);
         but6.setEnabled(false);
-        Button but7 = (Button) findViewById(R.id.button7);
+        Button but7 = findViewById(R.id.button7);
         but7.setEnabled(false);
-        Button but8 = (Button) findViewById(R.id.button8);
+        Button but8 = findViewById(R.id.button8);
         but8.setEnabled(false);
-        Button but9 = (Button) findViewById(R.id.button9);
+        Button but9 = findViewById(R.id.button9);
         but9.setEnabled(false);
     }
 
@@ -110,11 +110,11 @@ public class MainActivity extends AppCompatActivity {
     public void drawSign(TileState state, int id) {
         switch (state) {
             case CROSS:
-                TextView textCross = (TextView) findViewById(id);
+                TextView textCross = findViewById(id);
                 textCross.setText("X");
                 break;
             case CIRCLE:
-                TextView textCircle = (TextView) findViewById(id);
+                TextView textCircle = findViewById(id);
                 textCircle.setText("O");
                 break;
             case INVALID:
